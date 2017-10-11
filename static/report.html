@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="static/index.css">
+    <style>a{text-decoration:none}
+a:hover, a:visited, a:link, a:active {color: black;}
+  </style> 
+
+</head>
+
+<body>
+    <div id="app">
+        <el-row :gutter="20">
+            <el-col :span="6">
+                <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            </el-col>
+            <el-col :span="18">
+                <div id="code" class="float">
+                    <h1><a v-bind:href="repourl">{{ repo }}</a></h1>
+                    <h3><a v-bind:href="fileurl" target="_blank">{{ fileurl }}</a></h3>
+                    <el-input type="textarea" autosize placeholder="code" v-model="textarea">
+                    </el-input>
+                </div>
+            </el-col>
+        </el-row>
+    </div>
+</body>
+<!-- <script src="static/jquery.min.js"></script> -->
+<!-- 先引入 Vue -->
+<script src="static/vue.js"></script>
+<!-- 引入组件库 -->
+<script src="static/index.js"></script>
+<script>
+var Main = {
+    data() {
+        return {
+            textarea: "",
+            data: [],
+            defaultProps: {
+                children: 'children',
+                label: 'label'
+            }
+        };
+    },
+    methods: {
+        handleNodeClick(data) {
+            myapp.textarea = data.code
+            myapp.fileurl = data.fileurl
+            myapp.repo = data.repo
+            myapp.repourl = "https://github.com/"+data.repo
+        }
+    }
+};
+var Ctor = Vue.extend(Main)
+var myapp = new Ctor().$mount('#app')
+//$.getJSON("result.json").then(response => { myapp.data = response })
+ myapp.data = [];//gitleak_data_replace
+
+jQuery(document).ready(function($) {
+    var $sidebar = $(".float"),
+        $window = $(window),
+        offset = $sidebar.offset(),
+        topPadding = 20;
+    $window.scroll(function() {
+        if ($window.scrollTop() > offset.top) {
+            $sidebar.stop().animate({
+                marginTop: $window.scrollTop() - offset.top + topPadding
+            });
+        } else {
+            $sidebar.stop().animate({
+                marginTop: 0
+            });
+        }
+    });
+});
+</script>
+
+</html>
