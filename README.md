@@ -48,3 +48,6 @@ md5_salt [AT] qq.com
 
 ## 参考
 https://github.com/repoog/GitPrey
+https://help.github.com/articles/about-searching-on-github/
+https://help.github.com/articles/understanding-the-search-syntax/
+https://help.github.com/articles/searching-code/
