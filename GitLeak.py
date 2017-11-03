@@ -149,7 +149,8 @@ class GitPrey(object):
                 code_file = self.__get_page_html(file_url.replace(HOST_NAME, RAW_NAME).replace('blob/', ''))
                 for code_line in code_file.split('\n'):
                     if len(repo_code_dic[repo_name][file_url]) > MAX_COUNT_SINGLE_FILE: break
-                    if '=' not in code_line and  ':' not in code_line: continue
+                    line_check = [i for i in LINE_MUSTHAVE if i in code_line]
+                    if not line_check: continue
                     account_code = re.search('|'.join(project_pattern), code_line, re.I)
                     if account_code:
                         code = code_line.encode('utf-8').strip()
