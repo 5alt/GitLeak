@@ -187,7 +187,7 @@ class GitPrey(object):
                         self.__output_project_info(cur_project_name)
                         file_print("[-] Compromise File:")
                     repo_file_dic[cur_project_name] = []  # Set compromise project item
-                elif os.path.splitext(file_url)[1].lower() not in EXT_BLACKLIST:
+                if os.path.splitext(file_url)[1].lower() not in EXT_BLACKLIST:
                     repo_file_dic[cur_project_name].append(HOST_NAME + file_url[1:])  # Set compromise project file item
                     if print_mode:
                         file_print(HOST_NAME + file_url[1:])

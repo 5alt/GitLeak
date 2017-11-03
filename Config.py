@@ -9,6 +9,7 @@ PASSWORD = ""
 # Blacklist
 EXT_BLACKLIST = [".ico", ".flv", ".css", ".jpg", ".png", ".jpeg", ".gif", ".pdf", ".ss3", ".rar", ".zip", ".avi", ".mp4", ".swf", ".wmi", ".exe", ".mpeg", ".dll", ".pcap", ".log", ".class", ".html"]
 LANG_BLACKLIST = ["html", "jsp", "smali"]
+LINE_MUSTHAVE = ['=', ':', 'define']
 
 # other
 MAX_INFONUM = 3
