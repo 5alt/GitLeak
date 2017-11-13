@@ -106,7 +106,7 @@ class GitPrey(object):
         """
         cur_par_html = BeautifulSoup(page_html, "lxml")
         project_info = cur_par_html.select("a.text-bold")
-        page_project = [project.text for project in project_info if not project.text.endswith('.github.io')]
+        page_project = [project.text for project in project_info if not project.text.endswith('.github.io') and not len([i for i in REPO_NAME_BLACKLIST if i in project.text.lower()])]
         return page_project
 
     def sensitive_info_query(self, project_string):
