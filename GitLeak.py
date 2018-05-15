@@ -123,6 +123,9 @@ class GitPrey(object):
         # Most five AND/OR operators in search function.
         for i in xrange(len(info_sig_list)/MAX_INFONUM+1):
             project_pattern = info_sig_list[i*MAX_INFONUM:i*MAX_INFONUM+MAX_INFONUM]
+
+            if len(project_pattern) == 0: break
+
             repo_code_dic = self.__file_content_inspect(project_string, file_pattern, project_pattern)
             code_dic.update(repo_code_dic)
         return code_dic
@@ -315,6 +318,9 @@ def project_miner(key_words):
     for i in xrange(len(total_project_list)/MAX_REPO_SINGLE_SEARCH+1):
             repo_list = total_project_list[i*MAX_REPO_SINGLE_SEARCH:i*MAX_REPO_SINGLE_SEARCH+MAX_REPO_SINGLE_SEARCH]
             # Join projects to together to search
+
+            if len(repo_list) == 0: break
+
             repo_string = " repo:" + " repo:".join(repo_list)
             result.update(_gitprey.sensitive_info_query(repo_string))
     jsonify_result(result)
